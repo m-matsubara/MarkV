@@ -10,7 +10,7 @@ cd %SOURCE_DIR%
 
 rem ■ 環境変数の設定
 title 環境変数の設定
-set MarkV_VER_APP=0.0.1
+set MarkV_VER_APP=0.0.1 beta 1
 rem set MarkV_VER_APP=1.0.0 release candidate 1
 rem set MarkV_VER_APP=1.0.0
 
@@ -40,11 +40,14 @@ md %ARCHIVE_DIR%
 md %ARCHIVE_DIR%\js
 md %ARCHIVE_DIR%\css
 
-rem ■ビルド
+rem ■ コミットハッシュ
+for /f "DELIMS=" %%A in ('git rev-parse HEAD') do set COMMIT_HASH_MarkV=%%A
+
+rem ■ ビルド
 echo const VERSION_STRING = '%MarkV_VER_APP%';>_version.inc
-fc version.inc _version.inc > nul
-if not %errorlevel% == 0 echo const VERSION_STRING = '%MarkV_VER_APP%';>version.inc
-del _version.inc
+rem fc version.inc _version.inc > nul
+rem if not %errorlevel% == 0 echo const VERSION_STRING = '%MarkV_VER_APP%';>version.inc
+rem del _version.inc
 echo Version %MarkV_VER_APP%
 
 rem for /F "tokens=1-3 delims=/ " %%a in ('date /t') do SET BUILD_DT=%%a/%%b/%%c
@@ -144,19 +147,32 @@ if not %EL%==0 type _make_x64.log
 if not %EL%==0 goto :BUILD_X64_FAILURE
 "%RADSTUDIO_HOME%\bin\dcc64.exe" --version > Win64\Release\build_info.txt
 
-xcopy /d "C:\Program Files (x86)\Embarcadero\Studio\%RADSTUDIO_VER%\Redist\Win64\WebView2Loader.dll" Win64\Release
-xcopy /e /d documents\* Win64\Release
-xcopy /e /d js\* Win64\Release\js
-xcopy /e /d css\* Win64\Release\css
+xcopy /d /y "C:\Program Files (x86)\Embarcadero\Studio\%RADSTUDIO_VER%\Redist\Win64\WebView2Loader.dll" Win64\Release
+xcopy /e /d /y documents\* Win64\Release
+xcopy /e /d /y js\* Win64\Release\js
+xcopy /e /d /y css\* Win64\Release\css
 
-xcopy Win64\Release\MarkV.exe %ARCHIVE_DIR%
-xcopy /d "C:\Program Files (x86)\Embarcadero\Studio\%RADSTUDIO_VER%\Redist\Win64\WebView2Loader.dll" %ARCHIVE_DIR%
-xcopy /e /d documents\* %ARCHIVE_DIR%
-xcopy /e /d js\* %ARCHIVE_DIR%\js
-xcopy /e /d css\* %ARCHIVE_DIR%\css
+xcopy /y Win64\Release\MarkV.exe %ARCHIVE_DIR%
+xcopy /d /y "C:\Program Files (x86)\Embarcadero\Studio\%RADSTUDIO_VER%\Redist\Win64\WebView2Loader.dll" %ARCHIVE_DIR%
+xcopy /e /d /y documents\* %ARCHIVE_DIR%
+xcopy /e /d /y js\* %ARCHIVE_DIR%\js
+xcopy /e /d /y css\* %ARCHIVE_DIR%\css
 
+rem ■ アーカイブ
 cd %ARCHIVE_DIR%
 PowerShell Compress-Archive -DestinationPath .\Mark-V_%MarkV_VER%_x64.zip -Path MarkV.exe,WebView2Loader.dll,js,css,readme.md,LISENCE.md,install_webview2.bat
+
+rmdir /S /Q js
+rmdir /S /Q css
+del install_webview2.bat
+del LISENCE.md
+del MarkV.exe
+del readme.md
+del WebView2Loader.dll
+
+echo cd %INIT_DIR% > download_src_archive.bat
+echo git archive %COMMIT_HASH_MarkV% --format=zip --output=%ARCHIVE_DIR%\Mark-V_%MarkV_VER%_%DT%_src.zip >> download_src_archive.bat
+
 start .
 cd %INIT_DIR%
 
