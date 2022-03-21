@@ -75,7 +75,8 @@ mkdir $(OUTPUTDIR)css
 xcopy /d /y "$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll" "$(OUTPUTDIR)"
 xcopy /e /d /y .\js\* $(OUTPUTDIR)js 
 xcopy /e /d /y .\css\* $(OUTPUTDIR)css 
-xcopy /d /y .\documents\* $(OUTPUTDIR) 
+xcopy /d /y .\*.md $(OUTPUTDIR) 
+xcopy /d /y .\*.bat $(OUTPUTDIR) 
 $(PostBuildEvent)]]></PostBuildEvent>
         <PostBuildEventCancelOnError>false</PostBuildEventCancelOnError>
         <VerInfo_Locale>1041</VerInfo_Locale>
@@ -122,6 +123,14 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <VerInfo_Release>1</VerInfo_Release>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=Mark-V Markdown Viewer;FileVersion=0.0.1.0;InternalName=Mark-V;LegalCopyright=Copyright © 2022 m.matsubara;LegalTrademarks=;OriginalFilename=MarkV.exe;ProgramID=jp.mmatsubara.$(MSBuildProjectName);ProductName=Mark-V Markdown Viewer;ProductVersion=0.0.1.0;Comments=</VerInfo_Keys>
+        <PostBuildEvent><![CDATA[mkdir $(OUTPUTDIR)js 
+mkdir $(OUTPUTDIR)css 
+xcopy /d /y "$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll" "$(OUTPUTDIR)"
+xcopy /e /d /y .\js\* $(OUTPUTDIR)js 
+xcopy /e /d /y .\css\* $(OUTPUTDIR)css 
+xcopy /d /y *.md $(OUTPUTDIR) 
+xcopy /d /y *.bat $(OUTPUTDIR) 
+$(PostBuildEvent)]]></PostBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -171,12 +180,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win64\Debug\MarkV.rsm" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win64">
-                        <RemoteName>MarkV.rsm</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="Win32\Debug\MarkV.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>MarkV.exe</RemoteName>
@@ -186,6 +189,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 <DeployFile LocalName="Win64\Debug\MarkV.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>MarkV.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win64\Debug\MarkV.rsm" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win64">
+                        <RemoteName>MarkV.rsm</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -992,8 +1001,8 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 <ProjectRoot Platform="OSX64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="OSXARM64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="OSXARM64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Linux64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
@@ -1015,7 +1024,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\*.md $(OUTPUTDIR) &amp;xcopy /d /y .\*.bat $(OUTPUTDIR) </PostBuildEvent>
         <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win64'">
@@ -1023,7 +1032,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y *.md $(OUTPUTDIR) &amp;xcopy /d /y *.bat $(OUTPUTDIR) &amp;mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\*.md $(OUTPUTDIR) &amp;xcopy /d /y .\*.bat $(OUTPUTDIR) </PostBuildEvent>
         <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win32'">
@@ -1031,7 +1040,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\*.md $(OUTPUTDIR) &amp;xcopy /d /y .\*.bat $(OUTPUTDIR) </PostBuildEvent>
         <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win64'">
@@ -1039,7 +1048,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\*.md $(OUTPUTDIR) &amp;xcopy /d /y .\*.bat $(OUTPUTDIR) </PostBuildEvent>
         <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>
