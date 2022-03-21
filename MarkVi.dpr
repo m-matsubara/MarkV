@@ -9,11 +9,11 @@
  ISC license | https://github.com/isaacs/inherits/blob/master/LICENSE
 }
 
-program MarkV;
+program MarkVi;
 
 uses
   Vcl.Forms,
-  ufmMarkV in 'ufmMarkV.pas' {frmMarkV};
+  ufmMarkVi in 'ufmMarkVi.pas' {frmMarkV};
 
 {$R *.res}
 
