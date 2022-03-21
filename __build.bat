@@ -148,13 +148,15 @@ if not %EL%==0 goto :BUILD_X64_FAILURE
 "%RADSTUDIO_HOME%\bin\dcc64.exe" --version > Win64\Release\build_info.txt
 
 xcopy /d /y "C:\Program Files (x86)\Embarcadero\Studio\%RADSTUDIO_VER%\Redist\Win64\WebView2Loader.dll" Win64\Release
-xcopy /e /d /y documents\* Win64\Release
+xcopy /e /d /y *.md Win64\Release
+xcopy /e /d /y *.bat Win64\Release
 xcopy /e /d /y js\* Win64\Release\js
 xcopy /e /d /y css\* Win64\Release\css
 
 xcopy /y Win64\Release\MarkV.exe %ARCHIVE_DIR%
 xcopy /d /y "C:\Program Files (x86)\Embarcadero\Studio\%RADSTUDIO_VER%\Redist\Win64\WebView2Loader.dll" %ARCHIVE_DIR%
-xcopy /e /d /y documents\* %ARCHIVE_DIR%
+xcopy /e /d /y *.md %ARCHIVE_DIR%
+xcopy /e /d /y *.bat %ARCHIVE_DIR%
 xcopy /e /d /y js\* %ARCHIVE_DIR%\js
 xcopy /e /d /y css\* %ARCHIVE_DIR%\css
 
