@@ -38,6 +38,8 @@ type
     procedure btPrintClick(Sender: TObject);
     procedure btnOpenDocumentClick(Sender: TObject);
     procedure timerReloadTimer(Sender: TObject);
+    procedure WebBrowserNewWindowRequested(Sender: TCustomEdgeBrowser;
+      Args: TNewWindowRequestedEventArgs);
   private
     { Private 宣言 }
     m_sTempDir: String;
@@ -63,6 +65,7 @@ implementation
 
 uses
   System.IOUtils
+  , System.StrUtils
   , Winapi.ShellAPI
   ;
 
@@ -177,6 +180,23 @@ begin
   btReload.Enabled := m_nFileIdx <> -1;
   btPriv.Enabled := m_nFileIdx > 0;
   btNext.Enabled := m_nFileIdx < Length(m_sxFiles) - 1;
+end;
+
+procedure TfrmMarkV.WebBrowserNewWindowRequested(Sender: TCustomEdgeBrowser;
+  Args: TNewWindowRequestedEventArgs);
+var
+  pcxUri: PWideChar;
+begin
+  Args.ArgsInterface.Get_uri(pcxUri);
+  var sUri: String := pcxUri;
+  if (sUri.StartsWith('file:///') and sUri.EndsWith('.md')) then
+  begin
+    sUri := Copy(sUri, 9, Length(sUri) - 1);
+    sUri := ReplaceStr(sUri, '/', '\');
+
+    LoadFile(sUri);
+    Args.ArgsInterface.Set_Handled(1);
+  end;
 end;
 
 procedure TfrmMarkV.DropFiles(var Msg: TWMDropFiles);

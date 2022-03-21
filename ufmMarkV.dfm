@@ -219,6 +219,7 @@ object frmMarkV: TfrmMarkV
     Width = 393
     Height = 209
     TabOrder = 1
+    OnNewWindowRequested = WebBrowserNewWindowRequested
   end
   object OpenDialog: TOpenTextFileDialog
     DefaultExt = 'md'
