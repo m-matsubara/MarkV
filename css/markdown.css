@@ -215,6 +215,7 @@ td {
 th {
   vertical-align: top;
   border: 2px #555555 solid;
+  color: #cccccc;
   background-color: #777777;
 }
 

@@ -2,8 +2,8 @@ object frmMarkV: TfrmMarkV
   Left = 0
   Top = 0
   Caption = 'Mark-V Markdown Viewer'
-  ClientHeight = 416
-  ClientWidth = 616
+  ClientHeight = 635
+  ClientWidth = 935
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,10 +19,11 @@ object frmMarkV: TfrmMarkV
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 616
+    Width = 935
     Height = 41
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 616
     object btReload: TSpeedButton
       Left = 30
       Top = 5
@@ -213,19 +214,12 @@ object frmMarkV: TfrmMarkV
       OnClick = btnOpenDocumentClick
     end
   end
-  object WebBrowser: TWebBrowser
-    Left = 16
-    Top = 96
-    Width = 537
-    Height = 257
+  object WebBrowser: TEdgeBrowser
+    Left = 8
+    Top = 64
+    Width = 393
+    Height = 209
     TabOrder = 1
-    SelectedEngine = EdgeIfAvailable
-    ControlData = {
-      4C00000080370000901A00000000000000000000000000000000000000000000
-      000000004C000000000000000000000001000000E0D057007335CF11AE690800
-      2B2E126208000000000000004C0000000114020000000000C000000000000046
-      8000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000100000000000000000000000000000000000000}
   end
   object OpenDialog: TOpenTextFileDialog
     DefaultExt = 'md'
