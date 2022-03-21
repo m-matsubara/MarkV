@@ -11,6 +11,7 @@ object frmMarkV: TfrmMarkV
   Font.Name = 'Segoe UI'
   Font.Style = []
   KeyPreview = True
+  Position = poDefault
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
