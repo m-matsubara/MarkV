@@ -13,7 +13,6 @@ __recovery/
 *.deployproj
 *.drc
 *.dres
-*.res
 *.otares
 *.identcache
 *.map
