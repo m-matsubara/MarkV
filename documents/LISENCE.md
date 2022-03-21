@@ -1,6 +1,6 @@
-# Mark-V License information
+# Mark-V Markdown Viewer License information
 
-## Mark-V
+## Mark-V Markdown Viewer
 Copyright © 2022 m.matsubara
 
 Released under the MIT license.
