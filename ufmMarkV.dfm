@@ -1,7 +1,7 @@
 object frmMarkV: TfrmMarkV
   Left = 0
   Top = 0
-  Caption = 'Mark-Vi Markdown Viewer'
+  Caption = 'Mark-V Markdown Viewer'
   ClientHeight = 635
   ClientWidth = 935
   Color = clBtnFace

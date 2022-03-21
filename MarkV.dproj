@@ -8,7 +8,7 @@
         <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
-        <MainSource>MarkVi.dpr</MainSource>
+        <MainSource>MarkV.dpr</MainSource>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -69,7 +69,7 @@
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
-        <SanitizedProjectName>MarkVi</SanitizedProjectName>
+        <SanitizedProjectName>MarkV</SanitizedProjectName>
         <PostBuildEvent><![CDATA[mkdir $(OUTPUTDIR)js 
 mkdir $(OUTPUTDIR)css 
 xcopy /d /y "$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll" "$(OUTPUTDIR)"
@@ -121,7 +121,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <VerInfo_MajorVer>0</VerInfo_MajorVer>
         <VerInfo_Release>1</VerInfo_Release>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=Mark-V (Markdown Viewer);FileVersion=0.0.1.0;InternalName=Mark-V;LegalCopyright=Copyright © 2022 m.matsubara;LegalTrademarks=;OriginalFilename=MarkV.exe;ProgramID=jp.mmatsubara.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.0.1.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=Mark-V Markdown Viewer;FileVersion=0.0.1.0;InternalName=Mark-V;LegalCopyright=Copyright © 2022 m.matsubara;LegalTrademarks=;OriginalFilename=MarkV.exe;ProgramID=jp.mmatsubara.$(MSBuildProjectName);ProductName=Mark-V Markdown Viewer;ProductVersion=0.0.1.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -141,7 +141,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="ufmMarkVi.pas">
+        <DCCReference Include="ufmMarkV.pas">
             <Form>frmMarkV</Form>
             <FormType>dfm</FormType>
         </DCCReference>
@@ -163,7 +163,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">MarkVi.dpr</Source>
+                    <Source Name="MainSource">MarkV.dpr</Source>
                 </Source>
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k280.bpl">Microsoft Office 2000 オートメーション サーバー ラッパー コンポーネントのサンプル</Excluded_Packages>
@@ -171,21 +171,21 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win32\Debug\MarkVi.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win64\Debug\MarkV.rsm" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win64">
+                        <RemoteName>MarkV.rsm</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win32\Debug\MarkV.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>MarkVi.exe</RemoteName>
+                        <RemoteName>MarkV.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win64\Debug\MarkVi.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win64\Debug\MarkV.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
-                        <RemoteName>MarkVi.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Win64\Debug\MarkVi.rsm" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win64">
-                        <RemoteName>MarkVi.rsm</RemoteName>
+                        <RemoteName>MarkV.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -990,10 +990,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 </DeployClass>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Android64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSXARM64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="Android64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Linux64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
