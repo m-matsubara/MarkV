@@ -204,15 +204,18 @@ img {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+  border: 2px #555555 solid;
 }
 
 td {
   vertical-align: top;
+  border: 2px #555555 solid;
 }
 
 th {
   vertical-align: top;
   border: 2px #555555 solid;
+  background-color: #777777;
 }
 
 @media only screen and (min-width: 480px) {
