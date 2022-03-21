@@ -11,18 +11,16 @@ type
   TfrmMarkV = class(TForm)
     Panel1: TPanel;
     btReload: TSpeedButton;
-    WebBrowser: TWebBrowser;
     btPriv: TSpeedButton;
     btNext: TSpeedButton;
     btPrint: TSpeedButton;
     btnOpenDocument: TSpeedButton;
     OpenDialog: TOpenTextFileDialog;
     timerReload: TTimer;
+    WebBrowser: TEdgeBrowser;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btReloadClick(Sender: TObject);
-    procedure WebBrowserProcessFailed(Sender: TCustomEdgeBrowser;
-      ProcessFailedKind: TOleEnum);
     procedure btPrivClick(Sender: TObject);
     procedure btNextClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -35,6 +33,8 @@ type
     m_sxFiles: TArray<String>;
     m_nFileIdx: Integer;
     m_nFileAge: Integer;
+
+    procedure DropFiles(var Msg:TWMDropFiles); message WM_DROPFILES;
   public
     { Public 宣言 }
 
@@ -52,6 +52,7 @@ implementation
 
 uses
   System.IOUtils
+  , Winapi.ShellAPI
   ;
 
 //  テンポラリパスの取得
@@ -168,6 +169,18 @@ begin
   btNext.Enabled := m_nFileIdx < Length(m_sxFiles) - 1;
 end;
 
+procedure TfrmMarkV.DropFiles(var Msg: TWMDropFiles);
+var
+  cxFileName: array [0..255] of Char;
+begin
+  var nDropFileCount := DragQueryFile(Msg.Drop, Cardinal(-1), nil, 0);
+  if (nDropFileCount > 0) then
+  begin
+    DragQueryFile(Msg.Drop, 0, cxFileName, SizeOf(cxFileName) - 1);
+    LoadFile(cxFileName);
+  end;
+  DragFinish(Msg.Drop);
+end;
 
 procedure TfrmMarkV.FormCreate(Sender: TObject);
 var
@@ -198,6 +211,7 @@ begin
   end;
   if (sFileName <> '') then
     LoadFile(sFileName);
+  DragAcceptFiles(Self.Handle, True);
 end;
 
 
@@ -253,12 +267,6 @@ end;
 procedure TfrmMarkV.btReloadClick(Sender: TObject);
 begin
   ChangeView(0);
-end;
-
-procedure TfrmMarkV.WebBrowserProcessFailed(Sender: TCustomEdgeBrowser;
-  ProcessFailedKind: TOleEnum);
-begin
-  ShowMessage('aaa');
 end;
 
 end.

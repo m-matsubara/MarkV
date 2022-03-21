@@ -70,6 +70,16 @@
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <SanitizedProjectName>MarkV</SanitizedProjectName>
+        <PostBuildEvent><![CDATA[mkdir $(OUTPUTDIR)js 
+mkdir $(OUTPUTDIR)css 
+xcopy /d /y "$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll" "$(OUTPUTDIR)"
+xcopy /e /d /y .\js\* $(OUTPUTDIR)js 
+xcopy /e /d /y .\css\* $(OUTPUTDIR)css 
+xcopy /d /y .\documents\* $(OUTPUTDIR) 
+$(PostBuildEvent)]]></PostBuildEvent>
+        <PostBuildEventCancelOnError>false</PostBuildEventCancelOnError>
+        <VerInfo_Locale>1041</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=Mark-V (Markdown Viewer);FileVersion=0.0.1.0;InternalName=Mark-V;LegalCopyright=Copyright © 2022 m.matsubara;LegalTrademarks=;OriginalFilename=MarkV.exe;ProgramID=jp.mmatsubara.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.0.1.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>soapserver;SyntEditDcl15;IndySystem;vclwinx;MyVcl;fmx;vclie;DbxCommonDriver;bindengine;vcldb;IndyIPCommon;VCLRESTComponents;FireDACCommonODBC;acQueryBuilderD16;FireDACCommonDriver;appanalytics;IndyProtocols;vclx;ecComnD12;IndyIPClient;dbxcds;vcledge;vclFireDAC;bindcompvclwinx;bindcomp;FmxTeeUI;FireDACCommon;IndyCore;RESTBackendComponents;bindcompfmx;bindcompdbx;inetdb;rtl;FireDACMySQLDriver;FireDACSqliteDriver;DbxClientDriver;FireDACADSDriver;Tee;RESTComponents;DBXSqliteDriver;vcl;vclactnband;TeeUI;IndyIPServer;fmxFireDAC;dbexpress;dsnapxml;dsnapcon;soapmidas;adortl;DMonkey;DBXMySQLDriver;DCP_Crypt_DelphiXE;acQueryBuilderDsgnD16;VclSmp;inet;vclimg;vcltouch;FireDACPgDriver;FireDAC;fmxase;inetdbxpress;xmlrtl;tethering;dbrtl;bindcompvcl;dsnap;fmxdae;TeeDB;CloudService;FireDACMSAccDriver;CustomIPTransport;fmxobj;bindcompvclsmp;FMXTee;soaprtl;vcldsnap;DBXInterBaseDriver;FireDACIBDriver;$(DCC_UsePackage)</DCC_UsePackage>
@@ -107,6 +117,11 @@
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_MajorVer>0</VerInfo_MajorVer>
+        <VerInfo_Release>1</VerInfo_Release>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=Mark-V (Markdown Viewer);FileVersion=0.0.1.0;InternalName=Mark-V;LegalCopyright=Copyright © 2022 m.matsubara;LegalTrademarks=;OriginalFilename=MarkV.exe;ProgramID=jp.mmatsubara.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.0.1.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -150,6 +165,10 @@
                 <Source>
                     <Source Name="MainSource">MarkV.dpr</Source>
                 </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k280.bpl">Microsoft Office 2000 オートメーション サーバー ラッパー コンポーネントのサンプル</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp280.bpl">Microsoft Office XP オートメーション サーバー ラッパー コンポーネントのサンプル</Excluded_Packages>
+                </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
                 <DeployFile LocalName="Win32\Debug\MarkV.exe" Configuration="Debug" Class="ProjectOutput">
@@ -960,8 +979,8 @@
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="Android64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSXARM64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Android64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Linux64" Name="$(PROJECTNAME)"/>
@@ -979,4 +998,36 @@
     <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
+    <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
+        <PreBuildEvent/>
+        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
+        <PreLinkEvent/>
+        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win64'">
+        <PreBuildEvent/>
+        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
+        <PreLinkEvent/>
+        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win32'">
+        <PreBuildEvent/>
+        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
+        <PreLinkEvent/>
+        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win64'">
+        <PreBuildEvent/>
+        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
+        <PreLinkEvent/>
+        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
+    </PropertyGroup>
 </Project>
