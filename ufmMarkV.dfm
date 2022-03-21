@@ -23,7 +23,6 @@ object frmMarkV: TfrmMarkV
     Height = 41
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 616
     object btReload: TSpeedButton
       Left = 30
       Top = 5
