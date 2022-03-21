@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.OleCtrls, SHDocVw, Vcl.Buttons,
-  Vcl.ExtCtrls, Winapi.WebView2, Winapi.ActiveX, Vcl.Edge;
+  Vcl.ExtCtrls, Winapi.WebView2, Winapi.ActiveX, Vcl.Edge, Vcl.ExtDlgs;
 
 type
   TfrmMarkV = class(TForm)
@@ -15,6 +15,9 @@ type
     btPriv: TSpeedButton;
     btNext: TSpeedButton;
     btPrint: TSpeedButton;
+    btnOpenDocument: TSpeedButton;
+    OpenDialog: TOpenTextFileDialog;
+    timerReload: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btReloadClick(Sender: TObject);
@@ -24,11 +27,14 @@ type
     procedure btNextClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btPrintClick(Sender: TObject);
+    procedure btnOpenDocumentClick(Sender: TObject);
+    procedure timerReloadTimer(Sender: TObject);
   private
     { Private 宣言 }
     m_sTempDir: String;
     m_sxFiles: TArray<String>;
     m_nFileIdx: Integer;
+    m_nFileAge: Integer;
   public
     { Public 宣言 }
 
@@ -86,7 +92,7 @@ begin
     for var nIdx := 0 to Length(m_sxFiles) - 1 do
     begin
       var sFile := m_sxFiles[nIdx];
-      if (sFile = sFileName) then
+      if (CompareText(sFile, sFileName) = 0) then
       begin
         m_nFileIdx := nIdx;
         break;
@@ -95,6 +101,16 @@ begin
   end;
   if (m_nFileIdx >= 0) then
     ChangeView(0);
+end;
+
+procedure TfrmMarkV.timerReloadTimer(Sender: TObject);
+begin
+  if (m_nFileIdx >= 0) then
+  begin
+    var nFileAge := FileAge(m_sxFiles[m_nFileIdx]);
+    if (nFileAge <> m_nFileAge) then
+      ChangeView(0);
+  end;
 end;
 
 procedure TfrmMarkV.ChangeView(nShift: Integer);
@@ -110,6 +126,7 @@ begin
     ssMdContents := TStringList.Create;
     ssHtmlContents := TStringList.Create;
     ssMdContents.LoadFromFile(sFileName, TEncoding.UTF8);
+    m_nFileAge := FileAge(sFileName);
     ssHtmlContents.Add(
 //      '<!-- saved from url=(0021)https://a5m2.mmatsubara.com -->'#10  // この行があると、ローカルで開く前提のファイルとなり、IEを開く際のスクリプトの確認（警告）表示が出なくなる。
 //      + '<!doctype html> '#10
@@ -158,6 +175,7 @@ var
 begin
   WebBrowser.Align := alClient;
 
+  m_nFileIdx := -1;
   m_sTempDir := GetTempDir;
   if (m_sTempDir[Length(m_sTempDir)] = '\') then
     m_sTempDir := Copy(m_sTempDir, 1, Length(m_sTempDir) - 1);
@@ -207,6 +225,14 @@ end;
 procedure TfrmMarkV.btNextClick(Sender: TObject);
 begin
   ChangeView(1);
+end;
+
+procedure TfrmMarkV.btnOpenDocumentClick(Sender: TObject);
+begin
+  if (OpenDialog.Execute) then
+  begin
+    LoadFile(OpenDialog.FileName);
+  end;
 end;
 
 procedure TfrmMarkV.btPrintClick(Sender: TObject);
