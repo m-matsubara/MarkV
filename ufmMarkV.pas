@@ -1,3 +1,14 @@
+ï»¿{
+ Mark-V
+ Copyright Â© 2022 m.matsubara
+
+ Released under the MIT license.
+ see https://opensource.org/licenses/MIT
+
+ The inherits function is:
+ ISC license | https://github.com/isaacs/inherits/blob/master/LICENSE
+}
+
 unit ufmMarkV;
 
 interface
@@ -28,7 +39,7 @@ type
     procedure btnOpenDocumentClick(Sender: TObject);
     procedure timerReloadTimer(Sender: TObject);
   private
-    { Private éŒ¾ }
+    { Private å®£è¨€ }
     m_sTempDir: String;
     m_sxFiles: TArray<String>;
     m_nFileIdx: Integer;
@@ -36,7 +47,7 @@ type
 
     procedure DropFiles(var Msg:TWMDropFiles); message WM_DROPFILES;
   public
-    { Public éŒ¾ }
+    { Public å®£è¨€ }
 
     procedure LoadFile(sFileName: String);
     procedure ChangeView(nShift: Integer);
@@ -55,13 +66,13 @@ uses
   , Winapi.ShellAPI
   ;
 
-//  ƒeƒ“ƒ|ƒ‰ƒŠƒpƒX‚Ìæ“¾
+//  ãƒ†ãƒ³ãƒãƒ©ãƒªãƒ‘ã‚¹ã®å–å¾—
 function GetTempDir: String;
 var
   nLength: Integer;
   sDir: String;
 begin
-  //•¶š—ñ‚ğŠi”[‚·‚é‚Ì‚É•K—v‚ÈƒTƒCƒY‚ğæ“¾
+  //æ–‡å­—åˆ—ã‚’æ ¼ç´ã™ã‚‹ã®ã«å¿…è¦ãªã‚µã‚¤ã‚ºã‚’å–å¾—
   nLength := GetTempPath(0, nil);
   if nLength > 0 then
   begin
@@ -116,9 +127,9 @@ end;
 
 procedure TfrmMarkV.ChangeView(nShift: Integer);
 begin
-  Inc(m_nFileIdx, nShift);
   if (m_nFileIdx < 0) then
-    exit; // TODO ƒGƒ‰[ˆ—
+    exit; // TODO ã‚¨ãƒ©ãƒ¼å‡¦ç†
+  Inc(m_nFileIdx, nShift);
 
   var sFileName := m_sxFiles[m_nFileIdx];
   var ssMdContents: TStrings;
@@ -129,14 +140,13 @@ begin
     ssMdContents.LoadFromFile(sFileName, TEncoding.UTF8);
     m_nFileAge := FileAge(sFileName);
     ssHtmlContents.Add(
-//      '<!-- saved from url=(0021)https://a5m2.mmatsubara.com -->'#10  // ‚±‚Ìs‚ª‚ ‚é‚ÆAƒ[ƒJƒ‹‚ÅŠJ‚­‘O’ñ‚Ìƒtƒ@ƒCƒ‹‚Æ‚È‚èAIE‚ğŠJ‚­Û‚ÌƒXƒNƒŠƒvƒg‚ÌŠm”FiŒxj•\¦‚ªo‚È‚­‚È‚éB
+//      '<!-- saved from url=(0021)https://a5m2.mmatsubara.com -->'#10  // ã“ã®è¡ŒãŒã‚ã‚‹ã¨ã€ãƒ­ãƒ¼ã‚«ãƒ«ã§é–‹ãå‰æã®ãƒ•ã‚¡ã‚¤ãƒ«ã¨ãªã‚Šã€IEã‚’é–‹ãéš›ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®ç¢ºèªï¼ˆè­¦å‘Šï¼‰è¡¨ç¤ºãŒå‡ºãªããªã‚‹ã€‚
 //      + '<!doctype html> '#10
       '<html> '#10
       + '<head> '#10
       + '  <meta charset="utf-8"/> '#10
       + '  <title>Marke-V Markdown Viewer</title> '#10
       + '  <script src="js/marked.min.js"></script> '#10
-      + '  <script src="js/highlight.pack.js"></script> '#10
       + '  <link href="' + m_sTempDir + '/css/markdown.css" rel="stylesheet"></link> '#10
 //      + '  <link href="https://raw.githubusercontent.com/simonlc/Markdown-CSS/master/markdown.css" rel="stylesheet"></link> '#10
       + '</head> '#10
@@ -202,7 +212,6 @@ begin
     MkDir(m_sTempDir + '\css');
   var sExeDir := ExtractFileDir(Application.ExeName);
   TFile.Copy(sExeDir + '\js\marked.min.js',     m_sTempDir + '\js\marked.min.js', True);
-  TFile.Copy(sExeDir + '\js\highlight.pack.js', m_sTempDir + '\js\highlight.pack.js', True);
   TFile.Copy(sExeDir + '\css\markdown.css',     m_sTempDir + '\css\markdown.css', True);
 
   if (ParamCount >= 1) then
@@ -211,6 +220,7 @@ begin
   end;
   if (sFileName <> '') then
     LoadFile(sFileName);
+  UpdateEnableControls;
   DragAcceptFiles(Self.Handle, True);
 end;
 
@@ -254,8 +264,8 @@ procedure TfrmMarkV.btPrintClick(Sender: TObject);
 //  vaIn, vaOut: OleVariant;
 begin
 {
-  WebBrowser.ControlInterface.ExecWBi
-    OLECMDID_PRINT,OLECMDEXECOPT_DONTPROMPTUSER,vaIn,vaOutj;
+  WebBrowser.ControlInterface.ExecWBï¼ˆ
+    OLECMDID_PRINT,OLECMDEXECOPT_DONTPROMPTUSER,vaIn,vaOutï¼‰;
 }
 end;
 

@@ -1003,7 +1003,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
         <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win64'">
@@ -1011,7 +1011,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
         <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win32'">
@@ -1019,7 +1019,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
         <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win64'">
@@ -1027,7 +1027,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\documents\* $(OUTPUTDIR) </PostBuildEvent>
         <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>
