@@ -11,6 +11,7 @@ object frmMarkV: TfrmMarkV
   Font.Name = 'Segoe UI'
   Font.Style = []
   KeyPreview = True
+  Position = poDefault
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
@@ -23,7 +24,6 @@ object frmMarkV: TfrmMarkV
     Height = 41
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 616
     object btReload: TSpeedButton
       Left = 30
       Top = 5
@@ -220,6 +220,7 @@ object frmMarkV: TfrmMarkV
     Width = 393
     Height = 209
     TabOrder = 1
+    OnNewWindowRequested = WebBrowserNewWindowRequested
   end
   object OpenDialog: TOpenTextFileDialog
     DefaultExt = 'md'
