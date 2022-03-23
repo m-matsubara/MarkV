@@ -134,6 +134,7 @@ begin
     exit; // TODO エラー処理
   Inc(m_nFileIdx, nShift);
 
+  var sExePath := ExtractFilePath(Application.ExeName);
   var sFileName := m_sxFiles[m_nFileIdx];
   var ssMdContents: TStrings;
   var ssHtmlContents: TStrings;
@@ -144,13 +145,14 @@ begin
     m_nFileAge := FileAge(sFileName);
     ssHtmlContents.Add(
 //      '<!-- saved from url=(0021)https://a5m2.mmatsubara.com -->'#10  // この行があると、ローカルで開く前提のファイルとなり、IEを開く際のスクリプトの確認（警告）表示が出なくなる。
-//      + '<!doctype html> '#10
-      '<html> '#10
+      '<!doctype html> '#10
+      + '<html> '#10
       + '<head> '#10
       + '  <meta charset="utf-8"/> '#10
-      + '  <title>Marke-V Markdown Viewer</title> '#10
-      + '  <script src="js/marked.min.js"></script> '#10
-      + '  <link href="' + m_sTempDir + '/css/markdown.css" rel="stylesheet"></link> '#10
+      + '  <title>Mark-V Markdown Viewer</title> '#10
+      + '  <base href="' + sFileName + '">'
+      + '  <script src="' + sExePath + 'js/marked.min.js"></script> '#10
+      + '  <link href="' + sExePath + 'css/markdown.css" rel="stylesheet"></link> '#10
 //      + '  <link href="https://raw.githubusercontent.com/simonlc/Markdown-CSS/master/markdown.css" rel="stylesheet"></link> '#10
       + '</head> '#10
       + '<body> '#10
@@ -226,13 +228,6 @@ begin
 
   if (DirectoryExists(m_sTempDir) = False) then
     MkDir(m_sTempDir);
-  if (DirectoryExists(m_sTempDir + '\js') = False) then
-    MkDir(m_sTempDir + '\js');
-  if (DirectoryExists(m_sTempDir + '\css') = False) then
-    MkDir(m_sTempDir + '\css');
-  var sExeDir := ExtractFileDir(Application.ExeName);
-  TFile.Copy(sExeDir + '\js\marked.min.js',     m_sTempDir + '\js\marked.min.js', True);
-  TFile.Copy(sExeDir + '\css\markdown.css',     m_sTempDir + '\css\markdown.css', True);
 
   if (ParamCount >= 1) then
   begin
