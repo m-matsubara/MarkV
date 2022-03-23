@@ -45,7 +45,7 @@ type
     m_sTempDir: String;
     m_sxFiles: TArray<String>;
     m_nFileIdx: Integer;
-    m_nFileAge: Integer;
+    m_dtFileAge: TDateTime;
 
     procedure DropFiles(var Msg:TWMDropFiles); message WM_DROPFILES;
   public
@@ -122,9 +122,13 @@ procedure TfrmMarkV.timerReloadTimer(Sender: TObject);
 begin
   if (m_nFileIdx >= 0) then
   begin
-    var nFileAge := FileAge(m_sxFiles[m_nFileIdx]);
-    if (nFileAge <> m_nFileAge) then
-      ChangeView(0);
+    try
+      var dtFileAge := TFile.GetLastWriteTime(m_sxFiles[m_nFileIdx]);
+      if (dtFileAge <> m_dtFileAge) then
+        ChangeView(0);
+    except
+      // ファイルが存在しなかった時などにエラーが発生する
+    end;
   end;
 end;
 
@@ -142,7 +146,7 @@ begin
     ssMdContents := TStringList.Create;
     ssHtmlContents := TStringList.Create;
     ssMdContents.LoadFromFile(sFileName, TEncoding.UTF8);
-    m_nFileAge := FileAge(sFileName);
+    m_dtFileAge := TFile.GetLastWriteTime(sFileName);
     ssHtmlContents.Add(
 //      '<!-- saved from url=(0021)https://a5m2.mmatsubara.com -->'#10  // この行があると、ローカルで開く前提のファイルとなり、IEを開く際のスクリプトの確認（警告）表示が出なくなる。
       '<!doctype html> '#10
