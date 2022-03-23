@@ -152,7 +152,7 @@ begin
       + '  <title>Mark-V Markdown Viewer</title> '#10
       + '  <base href="' + sFileName + '">'
       + '  <script src="' + sExePath + 'js/marked.min.js"></script> '#10
-      + '  <link href="' + sExePath + 'css/markdown.css" rel="stylesheet"></link> '#10
+      + '  <link href="' + sExePath + 'css/github-markdown-light.css" rel="stylesheet"></link> '#10
 //      + '  <link href="https://raw.githubusercontent.com/simonlc/Markdown-CSS/master/markdown.css" rel="stylesheet"></link> '#10
       + '</head> '#10
       + '<body> '#10
