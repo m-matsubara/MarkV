@@ -160,7 +160,7 @@ begin
 //      + '  <link href="https://raw.githubusercontent.com/simonlc/Markdown-CSS/master/markdown.css" rel="stylesheet"></link> '#10
       + '</head> '#10
       + '<body> '#10
-      + '<div id="content"> '#10
+      + '<div id="content" style="margin:0px 30px"> '#10
     );
     ssHtmlContents.AddStrings(ssMdContents);
     ssHtmlContents.Add(
