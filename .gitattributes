@@ -1,0 +1,8 @@
+*           text=auto
+*.md        text
+*.js        text eol=lf
+*.css       text eol=lf
+*.sh        text eol=lf
+*.png       -text
+*.bmp       -text
+*.res       -text
