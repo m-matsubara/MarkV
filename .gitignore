@@ -23,3 +23,5 @@ __recovery/
 *.lnk
 *.log
 *.rcn
+/picture/PNGs
+/picture/BMPs
