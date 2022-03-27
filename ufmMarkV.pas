@@ -59,6 +59,11 @@ type
 var
   frmMarkV: TfrmMarkV;
 
+// Microsoft Edge WebView2Runtime がインストールされているか確認する
+function CheckWebView2Runtime: Boolean;
+// Microsoft Edge WebView2Runtime をインストールする
+procedure InstallWebView2Runtime;
+
 implementation
 
 {$R *.dfm}
@@ -67,7 +72,14 @@ uses
   System.IOUtils
   , System.StrUtils
   , Winapi.ShellAPI
+  , System.Win.Registry
   ;
+
+resourcestring
+  r_sConfirmWebView2RuntimeInstall = 'This application requires Microsoft Edge WebView2 Runtime. Are you sure you want to install it?';
+//*  r_sConfirmWebView2RuntimeInstall = 'このアプリケーションには、Microsoft Edge WebView2 Runtime が必要です。インストールしてよろしいですか？。';
+  r_sRerunMessage = 'Re-run after installing Microsoft Edge Webview2 Runtime.';
+//*  r_sRerunMessage = 'Microsoft Edge Webview2 Runtime インストール後に再実行してください。';
 
 //  テンポラリパスの取得
 function GetTempDir: String;
@@ -86,6 +98,31 @@ begin
   end
   else
     raise Exception.Create('Filure get temporary directory.');
+end;
+
+// Microsoft Edge WebView2Runtime がインストールされているか確認する
+function CheckWebView2Runtime: Boolean;
+begin
+  var Registry := TRegistry.Create;
+  Registry.RootKey := HKEY_LOCAL_MACHINE;
+{$ifdef WIN64}
+  // X86-64
+  var sKeyName := 'SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}';
+{$else}
+  // X86 … 2022/03/27 時点では提供されない。
+  var sKeyName := 'SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}';
+{$endif}
+  Result := Registry.KeyExists(sKeyName);
+end;
+
+// Microsoft Edge WebView2Runtime をインストールする
+procedure InstallWebView2Runtime;
+begin
+  if (MessageDlg(r_sConfirmWebView2RuntimeInstall, mtConfirmation, [mbOK, mbCancel], 0) = mrOk) then
+  begin
+    MessageDlg(r_sRerunMessage, TMsgDlgType.mtInformation, [mbOK], 0);
+    ShellExecute(0, PWideChar('open'), PWideChar('install_webview2.bat'), nil, nil, SW_MINIMIZE);
+  end;
 end;
 
 procedure TfrmMarkV.LoadFile(sFileName: String);

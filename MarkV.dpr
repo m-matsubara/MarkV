@@ -20,6 +20,11 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  if (CheckWebView2Runtime = False) then
+  begin
+    InstallWebView2Runtime;
+    halt(1);
+  end;
   Application.CreateForm(TfrmMarkV, frmMarkV);
   Application.Run;
 end.

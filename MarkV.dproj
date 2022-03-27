@@ -1013,8 +1013,8 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 <ProjectRoot Platform="OSX64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSXARM64" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Linux64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
@@ -1036,7 +1036,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\*.md $(OUTPUTDIR) &amp;xcopy /d /y .\*.bat $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\*.md $(OUTPUTDIR) &amp;xcopy /d /y .\*.bat $(OUTPUTDIR) </PostBuildEvent>
         <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win64'">
@@ -1044,7 +1044,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>xcopy /d /y *.md $(OUTPUTDIR) &amp;xcopy /d /y *.bat $(OUTPUTDIR) &amp;mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\*.md $(OUTPUTDIR) &amp;xcopy /d /y .\*.bat $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEvent>xcopy /d /y *.md $(OUTPUTDIR) &amp;xcopy /d /y *.bat $(OUTPUTDIR) &amp;mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\*.md $(OUTPUTDIR) &amp;xcopy /d /y .\*.bat $(OUTPUTDIR) </PostBuildEvent>
         <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win32'">
@@ -1052,7 +1052,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\*.md $(OUTPUTDIR) &amp;xcopy /d /y .\*.bat $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\*.md $(OUTPUTDIR) &amp;xcopy /d /y .\*.bat $(OUTPUTDIR) </PostBuildEvent>
         <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win64'">
@@ -1060,7 +1060,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\*.md $(OUTPUTDIR) &amp;xcopy /d /y .\*.bat $(OUTPUTDIR) </PostBuildEvent>
+        <PostBuildEvent>mkdir $(OUTPUTDIR)js &amp;mkdir $(OUTPUTDIR)css &amp;xcopy /d /y &quot;$(BDS)¥Redist¥$(Platform)¥WebView2Loader.dll&quot; &quot;$(OUTPUTDIR)&quot;&amp;xcopy /e /d /y .\js\* $(OUTPUTDIR)js &amp;xcopy /e /d /y .\css\* $(OUTPUTDIR)css &amp;xcopy /d /y .\*.md $(OUTPUTDIR) &amp;xcopy /d /y .\*.bat $(OUTPUTDIR) </PostBuildEvent>
         <PostBuildEventIgnoreExitCode>True</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>
