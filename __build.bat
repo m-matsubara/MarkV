@@ -10,7 +10,7 @@ cd %SOURCE_DIR%
 
 rem ¡ ŠÂ‹«•Ï”‚Ìİ’è
 title ŠÂ‹«•Ï”‚Ìİ’è
-set MarkV_VER_APP=0.0.2 beta 2
+set MarkV_VER_APP=0.0.3 beta 3
 rem set MarkV_VER_APP=1.0.0 release candidate 1
 rem set MarkV_VER_APP=1.0.0
 
