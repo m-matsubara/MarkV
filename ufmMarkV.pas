@@ -125,10 +125,16 @@ begin
   end;
 end;
 
+// マークダウンファイルを開く
+// ← → ボタンで別のマークダウンファイルを開けるように同じフォルダにあるマークダウンファイルの一覧も生成する
 procedure TfrmMarkV.LoadFile(sFileName: String);
 begin
+  // 同じフォルダにある他のマークダウンファイルを列挙する
   var sFilePath := ExtractFilePath(sFileName);
   m_sxFiles := TDirectory.GetFiles(sFilePath, '*.md', TSearchOption.soTopDirectoryOnly);
+  // 指定されたファイルが、配列中で何番目かを判定する
+
+  // 完全一致で配列中からファイル名を検索する
   m_nFileIdx := -1;
   for var nIdx := 0 to Length(m_sxFiles) - 1 do
   begin
@@ -139,6 +145,7 @@ begin
       break;
     end;
   end;
+  // 完全一致で配列中からファイル名が見つからない場合、大文字小文字無視で配列中から検索する
   if (m_nFileIdx = -1) then
   begin
     for var nIdx := 0 to Length(m_sxFiles) - 1 do
@@ -155,31 +162,24 @@ begin
     ChangeView(0);
 end;
 
-procedure TfrmMarkV.timerReloadTimer(Sender: TObject);
-begin
-  if (m_nFileIdx >= 0) then
-  begin
-    try
-      var dtFileAge := TFile.GetLastWriteTime(m_sxFiles[m_nFileIdx]);
-      if (dtFileAge <> m_dtFileAge) then
-        ChangeView(0);
-    except
-      // ファイルが存在しなかった時などにエラーが発生する
-    end;
-  end;
-end;
-
+// m_sxFiles 配列中のマークダウンファイルを読み込む
+//  nShift: 配列インデックスの移動量
 procedure TfrmMarkV.ChangeView(nShift: Integer);
 begin
   if (m_nFileIdx < 0) then
     exit; // TODO エラー処理
   Inc(m_nFileIdx, nShift);
 
+  // 実行ファイルのパス（jsやcssを読み込む起点）
   var sExePath := ExtractFilePath(Application.ExeName);
+  // マークダウンファイル
   var sFileName := m_sxFiles[m_nFileIdx];
+  // マークダウンファイルの内容
   var ssMdContents: TStrings;
+  // HTMLファイルの内容(marked を使ってマークダウンファイルを表示するための一時HTMLファイル)
   var ssHtmlContents: TStrings;
   try
+    // marked を使ってマークダウンを HTML に変換して表示するための一時HTMLファイルを生成する。
     ssMdContents := TStringList.Create;
     ssHtmlContents := TStringList.Create;
     ssMdContents.LoadFromFile(sFileName, TEncoding.UTF8);
@@ -193,8 +193,7 @@ begin
       + '  <title>Mark-V Markdown Viewer</title> '#10
       + '  <base href="' + sFileName + '">'
       + '  <script src="' + sExePath + 'js/marked.min.js"></script> '#10
-      + '  <link href="' + sExePath + 'css/github-markdown-light.css" rel="stylesheet"></link> '#10
-//      + '  <link href="https://raw.githubusercontent.com/simonlc/Markdown-CSS/master/markdown.css" rel="stylesheet"></link> '#10
+      + '  <link href="' + sExePath + 'css/github-markdown-light.css" rel="stylesheet"></link> '#10   // TODO 2022/03/27 Dark mode
       + '</head> '#10
       + '<body> '#10
       + '<div id="content" style="margin:0px 30px"> '#10
@@ -218,6 +217,7 @@ begin
   end;
 end;
 
+// 押下可能なボタンの制御
 procedure TfrmMarkV.UpdateEnableControls;
 begin
   btReload.Enabled := m_nFileIdx <> -1;
@@ -225,6 +225,7 @@ begin
   btNext.Enabled := m_nFileIdx < Length(m_sxFiles) - 1;
 end;
 
+// WebBrowser コンポーネントにマークダウンファイルをドラッグ＆ドロップされたときにファイルを読み込む
 procedure TfrmMarkV.WebBrowserNewWindowRequested(Sender: TCustomEdgeBrowser;
   Args: TNewWindowRequestedEventArgs);
 var
@@ -242,6 +243,7 @@ begin
   end;
 end;
 
+// ツールバーなどにマークダウンファイルをドラッグ＆ドロップされたときにファイルを読み込む
 procedure TfrmMarkV.DropFiles(var Msg: TWMDropFiles);
 var
   cxFileName: array [0..255] of Char;
@@ -261,15 +263,18 @@ var
 begin
   WebBrowser.Align := alClient;
 
+  // 変数初期化
   m_nFileIdx := -1;
   m_sTempDir := GetTempDir;
+
+  // テンポラリディレクトリを作成
   if (m_sTempDir[Length(m_sTempDir)] = '\') then
     m_sTempDir := Copy(m_sTempDir, 1, Length(m_sTempDir) - 1);
   m_sTempDir := m_sTempDir + '\Mark-V';
-
   if (DirectoryExists(m_sTempDir) = False) then
     MkDir(m_sTempDir);
 
+  // 起動オプションとしてファイルが指定されていたら開く
   if (ParamCount >= 1) then
   begin
     sFileName := ParamStr(1);
@@ -277,9 +282,10 @@ begin
   if (sFileName <> '') then
     LoadFile(sFileName);
   UpdateEnableControls;
+
+  // ドラッグ＆ドロップの設定（ツールバーなど）
   DragAcceptFiles(Self.Handle, True);
 end;
-
 
 
 procedure TfrmMarkV.FormDestroy(Sender: TObject);
@@ -287,9 +293,26 @@ begin
 //
 end;
 
+procedure TfrmMarkV.timerReloadTimer(Sender: TObject);
+begin
+  // 読み込んでいるファイルが変更されたら自動でリロードする
+  // TODO リロードボタン要らない？
+  if (m_nFileIdx >= 0) then
+  begin
+    try
+      var dtFileAge := TFile.GetLastWriteTime(m_sxFiles[m_nFileIdx]);
+      if (dtFileAge <> m_dtFileAge) then
+        ChangeView(0);
+    except
+      // ファイルが存在しなかった時などにエラーが発生する
+    end;
+  end;
+end;
+
 procedure TfrmMarkV.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
+  // 左右ボタンの押下で同じフォルダにあるマークダウンファイルを移動する
   if (Key = VK_LEFT) then
   begin
     if (m_nFileIdx > 0) then
