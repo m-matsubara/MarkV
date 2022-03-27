@@ -29,6 +29,7 @@ type
     OpenDialog: TOpenTextFileDialog;
     timerReload: TTimer;
     WebBrowser: TEdgeBrowser;
+    btChangeCSS: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btReloadClick(Sender: TObject);
@@ -40,12 +41,14 @@ type
     procedure timerReloadTimer(Sender: TObject);
     procedure WebBrowserNewWindowRequested(Sender: TCustomEdgeBrowser;
       Args: TNewWindowRequestedEventArgs);
+    procedure btChangeCSSClick(Sender: TObject);
   private
     { Private 宣言 }
     m_sTempDir: String;
     m_sxFiles: TArray<String>;
     m_nFileIdx: Integer;
     m_dtFileAge: TDateTime;
+    m_bDarkMode: Boolean;
 
     procedure DropFiles(var Msg:TWMDropFiles); message WM_DROPFILES;
   public
@@ -175,10 +178,17 @@ begin
   // マークダウンファイル
   var sFileName := m_sxFiles[m_nFileIdx];
   // マークダウンファイルの内容
-  var ssMdContents: TStrings;
+  var ssMdContents: TStrings := nil;
   // HTMLファイルの内容(marked を使ってマークダウンファイルを表示するための一時HTMLファイル)
-  var ssHtmlContents: TStrings;
+  var ssHtmlContents: TStrings := nil;
   try
+    // CSS ファイル名（フォルダ名含まず）
+    var sCssFileName: String;
+    if (m_bDarkMode) then
+      sCssFileName := 'github-markdown-dark.css'
+    else
+      sCssFileName := 'github-markdown-light.css';
+
     // marked を使ってマークダウンを HTML に変換して表示するための一時HTMLファイルを生成する。
     ssMdContents := TStringList.Create;
     ssHtmlContents := TStringList.Create;
@@ -193,7 +203,7 @@ begin
       + '  <title>Mark-V Markdown Viewer</title> '#10
       + '  <base href="' + sFileName + '">'
       + '  <script src="' + sExePath + 'js/marked.min.js"></script> '#10
-      + '  <link href="' + sExePath + 'css/github-markdown-light.css" rel="stylesheet"></link> '#10   // TODO 2022/03/27 Dark mode
+      + '  <link href="' + sExePath + 'css/' + sCssFileName + '" rel="stylesheet"></link> '#10
       + '</head> '#10
       + '<body> '#10
       + '<div id="content" style="margin:0px 30px"> '#10
@@ -267,6 +277,22 @@ begin
   m_nFileIdx := -1;
   m_sTempDir := GetTempDir;
 
+  // レジストリの設定値取得
+  var Registry: TRegistry;
+  try
+    Registry := TRegistry.Create;
+    Registry.RootKey := HKEY_CURRENT_USER;
+    Registry.OpenKey('Software\mmatsubara\Mark-V', True);
+    if (Registry.ValueExists('Darkmode')) then
+    begin
+      m_bDarkMode := Registry.ReadBool('Darkmode');
+    end
+    else
+      m_bDarkMode := False; // TODO OSの状態から取得するようにする
+  finally
+    FreeAndNil(Registry);
+  end;
+
   // テンポラリディレクトリを作成
   if (m_sTempDir[Length(m_sTempDir)] = '\') then
     m_sTempDir := Copy(m_sTempDir, 1, Length(m_sTempDir) - 1);
@@ -290,7 +316,16 @@ end;
 
 procedure TfrmMarkV.FormDestroy(Sender: TObject);
 begin
-//
+  // レジストリの設定値取得
+  var Registry: TRegistry;
+  try
+    Registry := TRegistry.Create;
+    Registry.RootKey := HKEY_CURRENT_USER;
+    Registry.OpenKey('Software\mmatsubara\Mark-V', True);
+    Registry.WriteBool('Darkmode', m_bDarkMode);
+  finally
+    FreeAndNil(Registry);
+  end;
 end;
 
 procedure TfrmMarkV.timerReloadTimer(Sender: TObject);
@@ -323,6 +358,12 @@ begin
     if (m_nFileIdx < Length(m_sxFiles) - 1) then
       ChangeView(1);
   end;
+end;
+
+procedure TfrmMarkV.btChangeCSSClick(Sender: TObject);
+begin
+  m_bDarkMode := not m_bDarkMode;
+  ChangeView(0);
 end;
 
 procedure TfrmMarkV.btNextClick(Sender: TObject);
