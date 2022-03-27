@@ -9,6 +9,7 @@ mkdir PNGs
 %INKSCAPE% -h %SIZE% -o "PNGs\reload.png"			"SVGs\reload.svg"
 %INKSCAPE% -h %SIZE% -o "PNGs\left.png"				"SVGs\left.svg"
 %INKSCAPE% -h %SIZE% -o "PNGs\right.png"			"SVGs\right.svg"
+%INKSCAPE% -h %SIZE% -o "PNGs\light-right.png"		"SVGs\light-right.svg"
 %INKSCAPE% -h %SIZE% -o "PNGs\print.png"			"SVGs\print.svg"
 
 %INKSCAPE% -h 32  -o "PNGs\MarkV_Icon.png"			"SVGs\MarkV_Icon.svg"
