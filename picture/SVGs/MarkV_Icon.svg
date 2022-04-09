@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="64mm"
+   height="64mm"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg1119"
+   sodipodi:docname="_ICON.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1121"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:snap-grids="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:bbox-paths="true"
+     inkscape:zoom="6.4070146"
+     inkscape:cx="115.18625"
+     inkscape:cy="106.60191"
+     inkscape:window-width="3840"
+     inkscape:window-height="2036"
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1899" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1116">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 32 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="64 : 32 : 1"
+       inkscape:persp3d-origin="32 : 21.333333 : 1"
+       id="perspective6998" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect1202"
+       style="fill:#0000ff;stroke:none;stroke-width:1.102;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+       d="M 2.6458333,5.2916697 7.9375,5.2916627 13.229167,17.19792 18.520833,5.2916697 H 23.8125 V 31.750004 H 18.520833 V 14.552087 l -3.96875,9.260417 H 11.90625 L 7.9375,14.552087 V 31.750004 H 2.6458333 Z"
+       sodipodi:nodetypes="cccccccccccccc" />
+    <path
+       id="rect1202-5"
+       style="fill:#008000;stroke:none;stroke-width:0.631266;paint-order:fill markers stroke"
+       d="m 30.427084,23.151041 h 5.291666 v 17.197917 h 2.645834 l -5.291667,5.291667 -5.291667,-5.291667 h 2.645834 z"
+       sodipodi:nodetypes="cccccccc" />
+    <path
+       id="rect1202-7"
+       style="fill:#0000ff;stroke-width:1.10155;paint-order:fill markers stroke"
+       d="m 39.6875,31.75 h 5.291667 L 50.270834,48.947917 55.5625,31.75 h 5.291667 l -7.9375,26.458334 H 47.625 Z"
+       sodipodi:nodetypes="cccccccc" />
+  </g>
+</svg>
